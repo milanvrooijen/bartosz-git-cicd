@@ -42,4 +42,13 @@ jobs:
       
       - name: Run tests
         run: pytest ./tests/account_tests.py
+
+      - name: Publish Test Results
+  	uses: EnricoMi/publish-unit-test-result-action@v2
+  	if: (!cancelled())
+	with:
+	  files: |
+	    test-results/**/*.xml
+	    test-results/**/*.trx
+	    test-results/**/*.json
         
