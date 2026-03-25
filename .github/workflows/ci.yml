@@ -43,12 +43,12 @@ jobs:
       - name: Run tests
         run: pytest ./tests/account_tests.py
 
+      - name: Make test results
+        run: pytest ./tests/account_tests.py --junitxml=junit/test-results-${{matrix.python-version }}.xml
+
       - name: Publish Test Results
-  	uses: EnricoMi/publish-unit-test-result-action@v2
-  	if: (!cancelled())
-	with:
-	  files: |
-	    test-results/**/*.xml
-	    test-results/**/*.trx
-	    test-results/**/*.json
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: (always())
+        with:
+          files: test-results/**/*.xml
         
